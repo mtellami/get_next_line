@@ -6,7 +6,7 @@
 /*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:33:45 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/07 18:48:46 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:21:35 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s)
 {
 	char	*copy;
-	size_t	s1_len;
+	size_t	len;
 	int		i;
 
 	i = 0;
-	s1_len = ft_strlen(s1);
-	copy = malloc(sizeof(char) * (s1_len + 1));
+	len = ft_strlen(s);
+	copy = malloc(sizeof(char) * (len + 1));
 	if (!copy)
 		return (NULL);
-	while (s1[i])
+	while (s[i])
 	{
-		copy[i] = s1[i];
+		copy[i] = s[i];
 		i++;
 	}
 	copy[i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 19:29:44 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/07 18:37:37 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:23:34 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_new_line(char *buffer)
 char	*get_reminder(char **str, int i)
 {
 	char	*rem;
-	int	len;
+	int		len;
 
 	len = ft_strlen(*str + i);
 	rem = ft_substr(*str, i, len);
@@ -48,10 +48,10 @@ char	*get_current_line(char **line, char **str, int i)
 char	*get_next_line(int fd)
 {
 	static char	*str;
-	char	buffer[BUFFER_SIZE + 1];
-	char	*line;
-	int	size;
-	int	i;
+	char		buffer[BUFFER_SIZE + 1];
+	char		*line;
+	int			size;
+	int			i;
 
 	if (!str)
 		str = ft_strdup("");
