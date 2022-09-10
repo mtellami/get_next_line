@@ -6,7 +6,7 @@
 /*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:58:46 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/10 16:39:53 by mtellami         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:43:12 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,14 @@ void	*ft_calloc(size_t count, size_t size)
 		return (0);
 	ft_bzero(res, size * count);
 	return (res);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	l;
+
+	l = 0;
+	while (s[l])
+		l++;
+	return (l);
 }
