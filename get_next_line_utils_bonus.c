@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 19:33:45 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/10 15:03:57 by mtellami         ###   ########.fr       */
+/*   Created: 2022/09/10 15:58:46 by mtellami          #+#    #+#             */
+/*   Updated: 2022/09/10 16:39:53 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return ((char *) ft_calloc(1, sizeof(char)));
+	if (ft_strlen(s) <= start + len)
+		substr = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
+	else
+		substr = malloc(sizeof(char) * (len + 1));
+	if (!substr)
+		return (NULL);
+	while (s[start] && i < len)
+		substr[i++] = s[start++];
+	substr[i] = '\0';
+	return (substr);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -61,28 +83,6 @@ char	*ft_strdup(const char *s)
 	return (copy);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*substr;
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		return ((char *) ft_calloc(1, sizeof(char)));
-	if (ft_strlen(s) <= start + len)
-		substr = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
-	else
-		substr = malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	while (s[start] && i < len)
-		substr[i++] = s[start++];
-	substr[i] = '\0';
-	return (substr);
-}
-
 void	ft_bzero(void *s, size_t n)
 {
 	while (n--)
@@ -98,14 +98,4 @@ void	*ft_calloc(size_t count, size_t size)
 		return (0);
 	ft_bzero(res, size * count);
 	return (res);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	l;
-
-	l = 0;
-	while (s[l])
-		l++;
-	return (l);
 }
