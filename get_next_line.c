@@ -5,71 +5,109 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 19:29:44 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/07 19:23:34 by mtellami         ###   ########.fr       */
+/*   Created: 2022/09/13 14:24:52 by mtellami          #+#    #+#             */
+/*   Updated: 2022/09/13 20:03:00 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_new_line(char *buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i])
-	{
-		if (buffer[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-char	*get_reminder(char **str, int i)
+char	*get_reminder(char *tmp)
 {
 	char	*rem;
-	int		len;
+	int		i;
+	int		j;
 
-	len = ft_strlen(*str + i);
-	rem = ft_substr(*str, i, len);
-	free(*str);
-	*str = NULL;
+	i = 0;
+	while (tmp[i] && tmp[i] != '\n')
+		i++;
+	if (!tmp[i])
+	{
+		free(tmp);
+		return (NULL);
+	}
+	rem = malloc(sizeof(char) * (ft_strlen(tmp) - i));
+	if (!rem)
+		return (NULL);
+	i++;
+	j = 0;
+	while (tmp[i + j])
+	{
+		rem[j] = tmp[i + j];
+		j++;
+	}
+	rem[j] = '\0';
+	free(tmp);
 	return (rem);
 }
 
-char	*get_current_line(char **line, char **str, int i)
+char	*get_new_line(char *tmp)
 {
-	*line = ft_substr(*str, 0, i + 1);
-	*str = get_reminder(str, i + 1);
-	return (*line);
+	char	*line;
+	int		i;
+
+	i = 0;
+	while (tmp[i] && tmp[i] != '\n')
+		i++;
+	if (tmp[i] == '\n')
+		line = malloc(sizeof(char) * (i + 2));
+	else
+		line = malloc(sizeof(char) * (i + 1));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (tmp[i] && tmp[i] != '\n')
+	{
+		line[i] = tmp[i];
+		i++;
+	}
+	if (tmp[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
+}
+
+char	*read_file(int fd, char *tmp)
+{
+	char		*buff;
+	int			i;
+
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (NULL);
+	i = 1;
+	while (!ft_strchr(tmp) && i)
+	{
+		i = read(fd, buff, BUFFER_SIZE);
+		if (i == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[i] = '\0';
+		tmp = ft_strjoin(tmp, buff);
+	}
+	free(buff);
+	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	char		buffer[BUFFER_SIZE + 1];
+	static char	*tmp;
 	char		*line;
-	int			size;
-	int			i;
 
-	if (!str)
-		str = ft_strdup("");
-	size = read(fd, buffer, BUFFER_SIZE);
-	while (size >= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	tmp = read_file(fd, tmp);
+	if (!tmp)
+		return (NULL);
+	if (!tmp[0])
 	{
-		buffer[size] = 0;
-		str = ft_strjoin(str, buffer);
-		i = get_new_line(str);
-		if (i != -1)
-			return (get_current_line(&line, &str, i));
-		if (!size && !str[0])
-			break ;
-		if (!size)
-			return (get_reminder(&str, 0));
-		size = read(fd, buffer, BUFFER_SIZE);
+		free(tmp);
+		tmp = NULL;
+		return (NULL);
 	}
-	free(str);
-	str = NULL;
-	return (NULL);
+	line = get_new_line(tmp);
+	tmp = get_reminder(tmp);
+	return (line);
 }
