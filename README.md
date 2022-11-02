@@ -12,11 +12,11 @@ variables.
 ---
 ### ♦️ Main Topic
 **File descriptor.**
-- what is file descriptor
+- What is file descriptor ?
 
 A file descriptor is a number that uniquely identifies an open file in a computer's operating system. It describes a data resource, and how that resource may be accessed.
 
-- 'Read' function
+- Read function ?
 
 The read() function shall attempt to read nbyte bytes from the file associated with the open file descriptor, fildes, into the buffer pointed to by buf.
 
