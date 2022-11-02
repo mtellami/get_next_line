@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtellami <mtellami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 14:24:52 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/13 20:03:00 by mtellami         ###   ########.fr       */
+/*   Created: 2022/10/15 22:10:05 by mtellami          #+#    #+#             */
+/*   Updated: 2022/10/20 13:31:09 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ char	*get_new_line(char *tmp)
 	while (tmp[i] && tmp[i] != '\n')
 		i++;
 	if (tmp[i] == '\n')
-		line = malloc(sizeof(char) * (i + 2));
-	else
-		line = malloc(sizeof(char) * (i + 1));
+		i += 1;
+	line = malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -101,7 +100,7 @@ char	*get_next_line(int fd)
 	tmp = read_file(fd, tmp);
 	if (!tmp)
 		return (NULL);
-	if (!tmp[0])
+	if (!(*tmp))
 	{
 		free(tmp);
 		tmp = NULL;

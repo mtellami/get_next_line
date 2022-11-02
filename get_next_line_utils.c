@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtellami <mtellami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 14:27:14 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/13 19:54:25 by mtellami         ###   ########.fr       */
+/*   Created: 2022/10/15 22:11:24 by mtellami          #+#    #+#             */
+/*   Updated: 2022/10/18 07:04:50 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 int	ft_strchr(char *str)
 {
@@ -35,6 +25,16 @@ int	ft_strchr(char *str)
 	return (0);
 }
 
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
@@ -46,7 +46,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = malloc(sizeof(char) * 1);
 		s1[0] = '\0';
 	}
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = malloc(sizeof(char) *(ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (0);
 	i = 0;
 	while (s1[i])
 	{

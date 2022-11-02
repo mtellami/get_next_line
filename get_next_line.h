@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtellami <mtellami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 14:25:24 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/14 12:32:05 by mtellami         ###   ########.fr       */
+/*   Created: 2022/10/15 22:07:52 by mtellami          #+#    #+#             */
+/*   Updated: 2022/10/18 04:52:27 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(char *str);
 int		ft_strchr(char *str);
+size_t	ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

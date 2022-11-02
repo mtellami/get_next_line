@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtellami <mtellami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 20:21:29 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/14 12:31:13 by mtellami         ###   ########.fr       */
+/*   Created: 2022/10/18 05:54:48 by mtellami          #+#    #+#             */
+/*   Updated: 2022/10/18 18:33:07 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
 int		ft_strchr(char *str);
 size_t	ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif

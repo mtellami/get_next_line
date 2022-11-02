@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtellami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mtellami <mtellami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 20:20:32 by mtellami          #+#    #+#             */
-/*   Updated: 2022/09/14 12:29:14 by mtellami         ###   ########.fr       */
+/*   Created: 2022/10/18 05:54:43 by mtellami          #+#    #+#             */
+/*   Updated: 2022/10/19 07:52:20 by mtellami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ char	*get_new_line(char *tmp)
 		i++;
 	}
 	if (tmp[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
@@ -96,15 +93,15 @@ char	*read_file(int fd, char *tmp)
 
 char	*get_next_line(int fd)
 {
-	char static	*tmp[8192];
+	static char	*tmp[OPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 8192)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+		return (0);
 	tmp[fd] = read_file(fd, tmp[fd]);
 	if (!tmp[fd])
-		return (NULL);
-	if (!tmp[fd][0])
+		return (0);
+	if (!(*tmp[fd]))
 	{
 		free(tmp[fd]);
 		tmp[fd] = NULL;
